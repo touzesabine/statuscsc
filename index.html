@@ -24,23 +24,20 @@
 
 		h1 {
 			text-align: center;
-			color: #006600;
-			font-size: xx-large;
+			color: #CCC;
+			font-size: x-large;
 		}
 
 		td {
-			background-color: #E4F5D4;
 			border: none;
 		}
-
+		tr:nth-child(even) {background: rgb(231, 231, 231)}
+		tr:nth-child(odd) {background: #FFF}
 		th,
 		td {
-			font-weight: bold;
-			border: 1px solid black;
 			padding: 10px;
 			text-align: center;
 		}
-        td {font-weight: lighter;}
 		td:nth-child(1) {
             text-align: left;
 		}
@@ -63,7 +60,7 @@
 				$(document).ready(function () {
                     // FETCHING DATA FROM JSON FILE
                     var rawbase = 'https://raw.githubusercontent.com/';
-                    var jsonloc = 'touzesabine/uppdownn/master/history/summary.json';
+                    var jsonloc = 'touzesabine/upptime/master/history/summary.json';
 
                     $.getJSON(rawbase + jsonloc, function (data) {
                                 
