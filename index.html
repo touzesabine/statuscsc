@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-    <meta http-equiv="refresh" content="120">
+	<meta http-equiv="refresh" content="120">
 	<title>Uptime local for now</title>
 
 	<!-- INCLUDING JQUERY-->
@@ -16,15 +16,27 @@
         * {font-family: 'Gill Sans',
 				'Gill Sans MT', ' Calibri',
 				'Trebuchet MS', 'sans-serif';}
+		a {text-decoration: none;}
 		table {
 			margin: 0 auto;
 			font-size: large;
-			border: none;
+			border: 0;
+			border-spacing:0;
 		}
-
+		.light {text-align: center;}
+		.light span {display:none}
+		.light div { 	
+			width: 15px; 
+			height: 15px;
+			border: 1px solid rgba(0, 0, 0, .2); 
+			margin: 0 20px;
+		}
+		.up {background-color:greenyellow}
+		.down {background-color:red}
+		
 		h1 {
 			text-align: center;
-			color: #CCC;
+			color: #999;
 			font-size: x-large;
 		}
 
@@ -74,8 +86,8 @@
 							upstatus += '<tr>';
                                 upstatus += '<td><a href=\"' + 
 								value.url + '\" target=\"_blank\">' + value.name + '</td>';
-							upstatus += '<td>' +
-								value.status + '</td>';
+							upstatus += '<td class=\"light\"><div class=\"' + value.status + '\"></div><span>' +
+								value.status + '</span></td>';
 							upstatus += '</tr>';
 						})
 						
@@ -86,5 +98,3 @@
 			</script>
 	</section>
 </body>
-
-</html>
