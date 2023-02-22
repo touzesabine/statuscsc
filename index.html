@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="refresh" content="120">
+	<meta name="robots" content="noindex">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<title>Status Dashboard</title>
+
+	<!-- INCLUDING JQUERY-->
+	<script src="https://code.jquery.com/jquery-3.5.1.js">
+	</script>
+
+	<!-- CSS FOR STYLING THE PAGE -->
+	<style>
+		div#stadash {
+    		font-family: Arial, Helvetica, sans-serif;
+			--fa-font-solid: normal 900 1em/1 "Font Awesome 6 Free";
+			width: 800px;
+    		margin: auto;
+		}
+		.material-icons {
+			font-size: 17px;
+		}
+		.sitesbox {
+            display: flex;
+			justify-content: space-around;
+			align-items: flex-start;
+			flex-wrap: wrap;
+          	}
+
+		/* Responsive layout - makes a one column-layout instead of a two-column layout */
+		@media (max-width: 800px) {
+			div#stadash {
+			width: 100%;
+		}
+		}
+		a.listit {text-decoration: none;
+			font-size: medium;
+			}
+		table {
+			margin: 10px;
+			font-size: large;
+			border: 1px #ccc solid;
+			border-spacing:0;
+			background-color: #FFF;
+		}
+		.light {text-align: center;}
+		.light span {display:none}
+		.light div { 	
+			width: 15px; 
+			height: 15px;
+			border: 1px solid #ccc; 
+			margin: auto;
+		}
+		.up {background-color:greenyellow}
+		.down {background-color:red}
+		
+		#stadash header {
+			padding: 30px;
+			margin:10px;
+			border-bottom: 4px solid #d85836;
+			background: #14213f url("https://santaclaraca.gov/favicon.ico") no-repeat left;
+  			background-size: 100px;
+			background-origin: content-box;
+		}
+		#stadash h1 {
+			float: right;
+			margin-left: 110px;
+			color: #d85836;
+			font-size: xx-large;
+		}
+		#stadash h2 {
+			font-size: large; 
+			padding-left: 110px;
+			color: #FFF;
+		}
+		td {
+			border: none;
+		}
+		tr:nth-child(even) {
+			background-color: #e4e1dcc4;
+		}
+		th,
+		td {
+			padding: 5px 10px;
+			text-align: center;
+			border-bottom: 1px #e4e1dc solid
+		}
+		td:nth-child(1) {
+            text-align: left;
+		}
+		td > img {
+			margin-right: 5px; 
+			height: 14px; 
+			width: 14py; 
+		}
+		#stadash tr:first-child {
+			color: #d85836;
+			font-weight: bolder;
+			text-shadow: 1px 1px #FFF, -1px -1px #FFF;
+			background-color: #e4e1dc;
+			opacity: 1;
+			background-size: 12px 12px;
+			background-image: repeating-linear-gradient(45deg, #ffffff 0, #ffffff 1.2000000000000002px, #e4e1dc 0, #e4e1dc 50%);
+		}
+	</style>
+</head>
+
+<body>
+	<div id="stadash">
+	<header>
+		<h1>Status Dashboard</h1>
+		<h2>City of <br/>Santa Clara</h2>
+		
+	</header>
+	<section>
+		<div class="sitesbox">
+		<!-- TABLE CONSTRUCTION-->
+		<table id='table' width="100%">
+			<!-- HEADING FORMATION -->
+			<tr>
+				<th>Website</th>
+				<th>Status</th>
+			</tr>
+			<script>
+				$(document).ready(function () {
+                    // FETCHING DATA FROM JSON FILE
+                    var rawbase = 'https://raw.githubusercontent.com/';
+                    var jsonloc = 'touzesabine/uppdownn/second/history/summary.json';
+
+                    $.getJSON(rawbase + jsonloc, function (data) {
+                                
+						        var upstatus = '';
+
+						// ITERATING THROUGH OBJECTS
+						$.each(data, function (key, value) {
+
+							//CONSTRUCTION OF ROWS HAVING
+							// DATA FROM JSON OBJECT
+							upstatus += '<tr>';
+							var foricon = '';
+							foricon = value.url.replace(/^http(s?):\/\//i, "");
+							foricon = foricon.replace(/\/$/, "");
+							if (value.url.startsWith("$")) {upstatus += '<td><img src=\"http://www.google.com/s2/favicons?domain=' + foricon + '" alt=\"\"/> ' + value.name + '</td>';
+							}
+							else {
+                            upstatus += '<td><img src=\"http://www.google.com/s2/favicons?domain=' + foricon + '" alt=\"\"/> <a class=\"listit\" href=\"' + 
+								value.url + '\" target=\"_blank\">' + value.name + '</td>';}
+							upstatus += '<td class=\"light\"><div class=\"' + value.status + '\"></div><span>' +
+								value.status + '</span></td>';
+							upstatus += '</tr>';
+						})
+						
+						//INSERTING ROWS INTO TABLE
+						$('#table').append(upstatus);
+                            });
+				});
+			</script>
+			
+			
+				
+		
+		</div>
+	</section>
+	</div>
+</body>
+
+
